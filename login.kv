@@ -1,0 +1,19 @@
+
+#:include connected.kv
+
+<Login>:
+    BoxLayout
+        id: login_layout
+        orientation: 'vertical'
+        padding: [10,50,10,50]
+        spacing: 50
+
+        Label:
+            text: 'Bem vindo'
+            font_size: 32
+
+        Button:
+            text: 'Connexion'
+            font_size: 24
+
+            on_press: root.do_login()
