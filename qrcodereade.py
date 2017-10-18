@@ -35,7 +35,7 @@ def main():
         # Uses PIL to convert the grayscale image into a ndary array that ZBar can understand.
         image = Image.fromarray(gray)
         width, height = image.size
-        zbar_image = zbar.Image(width, height, 'Y800', image.tostring())
+        zbar_image = zbar.Image(width, height, 'Y800', image.tobytes())
 
         # Scans the zbar image.
         scanner = zbar.ImageScanner()
