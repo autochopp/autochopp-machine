@@ -1,19 +1,33 @@
 
 #:include connected.kv
+#import hex kivy.utils.get_color_from_hex
 
 <Login>:
-    BoxLayout
-        id: login_layout
-        orientation: 'vertical'
-        padding: [10,50,10,50]
-        spacing: 50
+     canvas:
+          Color:
+               #rgb: (0.93, 0.93, 0.93)
+               #rgb: (0.047, 0.22, 0.698)
+               rgb: (0.992, 0.788, 0.267, 1)
+          Rectangle:
+               pos: self.pos
+               size: self.size
 
-        Label:
-            text: 'Bem vindo'
-            font_size: 32
+     BoxLayout
+          id: login_layout
+          orientation: 'vertical'
+          padding: [10,50,10,50]
+          spacing: 50
 
-        Button:
-            text: 'Acessar Sistema'
-            font_size: 24
+          Label:
+               text: 'Bem vindo'
+               font_size: 32
+               color: (0.047, 0.22, 0.698, 1)
 
-            on_press: root.do_login()
+          Button:
+               background_color: (0.047, 0.22, 0.698, 1)
+               color: (0.992, 0.788, 0.267, 1)
+               text: 'Acessar Sistema'
+               font_size: 24
+
+               on_press: root.do_login()
+
