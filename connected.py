@@ -7,7 +7,6 @@ import cv2
 
 class Connected(Screen):
     def readcode(self):
-        print ('dsadadasdasdasdsad')
         # Begin capturing video. You can modify what video source to use with VideoCapture's argument. It's currently set
         # to be your webcam.
         capture = cv2.VideoCapture(0)
@@ -24,7 +23,6 @@ class Connected(Screen):
             cv2.namedWindow('image', cv2.WINDOW_NORMAL)
             cv2.imshow('image', frame)
             cv2.resizeWindow('image', 400,400)
-            # cv2.destroyAllWindows()
 
             # Converts image to grayscale.
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -42,12 +40,8 @@ class Connected(Screen):
             for decoded in zbar_image:
                 print(decoded.data)
                 return decoded.data
-        
-        # def requisitonApi(self):
-            
 
     def __init__(self, **kwargs):
-        # super(Screen,self).__init__(**kwargs)
         self.readcode()
 
 
