@@ -23,7 +23,8 @@ class Connected(Screen):
             # Displays the current frame
             cv2.namedWindow('image', cv2.WINDOW_NORMAL)
             cv2.imshow('image', frame)
-            cv2.destroyAllWindows()
+            cv2.resizeWindow('image', 400,400)
+            # cv2.destroyAllWindows()
 
             # Converts image to grayscale.
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -40,6 +41,10 @@ class Connected(Screen):
             # Prints data from image.
             for decoded in zbar_image:
                 print(decoded.data)
+                return decoded.data
+        
+        # def requisitonApi(self):
+            
 
     def __init__(self, **kwargs):
         # super(Screen,self).__init__(**kwargs)
