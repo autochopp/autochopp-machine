@@ -1,13 +1,15 @@
 #coding: utf-8
 
 from kivy.app import App
-from kivy.uix.screenmanager import Screen, SlideTransition
+from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 import zbar
-
+from time import sleep
 from PIL import Image
 import cv2
 import requests
 import socket
+
+from validateCode import ValidateCode
 
 class Connected(Screen):
     def readcode(self):
@@ -74,4 +76,17 @@ class Connected(Screen):
     def __init__(self, **kwargs):
         self.requisition_code()
 
+
+            # Teste para sair do while quando um qrcode for lido
+            if decoded.data is not None:
+                break
+
+    def validateQRCode(self):
+        app = App.get_running_app()
+        
+        manager.transition = SlideTransition(direction="left")
+        manager.current = 'validateCode'
+
+        app.config.read(app.get_application_config())
+        app.config.write()
 
