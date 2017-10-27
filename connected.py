@@ -1,9 +1,12 @@
+#coding: utf-8
+
 from kivy.app import App
 from kivy.uix.screenmanager import Screen, SlideTransition
 import zbar
 
 from PIL import Image
 import cv2
+import requests
 
 class Connected(Screen):
     def readcode(self):
@@ -40,8 +43,20 @@ class Connected(Screen):
             for decoded in zbar_image:
                 print(decoded.data)
                 return decoded.data
+    
+    def requisition_code(self):
+        readed_qrcode = self.readcode()
+        try:
+            r = requests.post("http://fast-retreat-18030.herokuapp.com/validate_qrcode", data={'qrcode': readed_qrcode})
+            result = r.json()
+            if result['status'] == 'bad_request':
+                print result['errors']
+            elif result['status'] == 'ok':
+                print result['code']
+        except:
+            print("Não foi possível conectar ao servidor")
 
     def __init__(self, **kwargs):
-        self.readcode()
+        self.requisition_code()
 
 
