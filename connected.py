@@ -7,6 +7,7 @@ import zbar
 from PIL import Image
 import cv2
 import requests
+import socket
 
 class Connected(Screen):
     def readcode(self):
@@ -53,8 +54,22 @@ class Connected(Screen):
                 print result['errors']
             elif result['status'] == 'ok':
                 print result['code']
+                self.open_socket(str(result['code']))
         except:
             print("Não foi possível conectar ao servidor")
+
+    def open_socket(self, message):
+        IP = "127.0.0.1"
+        PORT = 9600
+    	TCP_IP = IP
+        TCP_PORT = PORT
+        BUFFER_SIZE = len(message)
+
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((TCP_IP, TCP_PORT))
+        sock.send(message)
+        data = sock.recv(100)
+        sock.close()
 
     def __init__(self, **kwargs):
         self.requisition_code()
