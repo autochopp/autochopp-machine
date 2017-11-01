@@ -7,11 +7,12 @@
           Color:
                #rgb: (0.93, 0.93, 0.93)
                #rgb: (0.047, 0.22, 0.698)
-               rgb: (0.992, 0.788, 0.267, 1)
+               #rgb: (0.992, 0.788, 0.267, 1)
           Rectangle:
                pos: self.pos
                size: self.size
-
+               source: "cover.png"
+     
      BoxLayout
           id: login_layout
           orientation: 'vertical'
@@ -30,4 +31,8 @@
                font_size: 24
 
                on_press: root.do_login()
+          #Image:
+               #source:'cover.png'
+               #size_hint_x: 1
+               #size_hint_y: .9
 

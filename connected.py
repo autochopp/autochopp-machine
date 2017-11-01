@@ -3,6 +3,7 @@
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 import zbar
+from kivy.lang import Builder
 from time import sleep
 from PIL import Image
 import cv2
@@ -84,8 +85,10 @@ class Connected(Screen):
     def validateQRCode(self):
         app = App.get_running_app()
         
-        manager.transition = SlideTransition(direction="left")
-        manager.current = 'validateCode'
+        self.manager.transition = SlideTransition(direction="left")
+        self.manager.current = 'validateCode'
+
+        Builder.load_file("validateCode.kv")
 
         app.config.read(app.get_application_config())
         app.config.write()
