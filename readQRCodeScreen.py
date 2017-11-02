@@ -48,8 +48,8 @@ class ReadQRCodeScreen(Screen):
         buf1 = cv2.flip(frame, 0)
         #converte em textura
         buf = buf1.tostring() 
-        texture1 = Texture.create(size=(frame.shape[1], frame.shape[0]), colorfmt='bgr')
-        texture1.blit_buffer(buf, colorfmt='bgr', bufferfmt='ubyte')
+        texture1 = Texture.create(size=(frame.shape[1], frame.shape[0]), colorfmt='rgb')
+        texture1.blit_buffer(buf, colorfmt='rgb', bufferfmt='ubyte')
         #apresenta a imagem
         self.imgCamera.texture = texture1
 
