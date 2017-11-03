@@ -11,6 +11,7 @@ from kivy.graphics.texture import Texture
 
 import cv2
 import zbar
+import requests
 
 from PIL import Image as ImagePIL
 
@@ -42,6 +43,7 @@ class ReadQRCodeScreen(Screen):
         Clock.schedule_interval(self.updateImage, 1.0/30.0)
  
     def updateImage(self, dt):
+        
         #captura uma imagem da camera
         ret, frame = self.capture.read()
         #inverte a imagem
@@ -53,10 +55,20 @@ class ReadQRCodeScreen(Screen):
         #apresenta a imagem
         self.imgCamera.texture = texture1
 
-        teste = self.readQRCode(frame)
+        #print(self.readQRCode(frame)) 
 
+        qrCode = self.readQRCode(frame)
+
+        if not qrCode is None:
+            self.requisition_code(qrCode)
+            del(self.capture)
+            cv2.destroyAllWindows()
+            print "Teste 'is not None' " + qrCode
+        else:
+            print "Teste 'is None'"  
+
+        #
         
-    
     def readQRCode(self, frame):
         # Converts image to grayscale.
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -72,6 +84,45 @@ class ReadQRCodeScreen(Screen):
 
         # Prints data from image.
         for decoded in zbar_image:
-            print(decoded.data)
-            #Clock.unschedule(self.updateImage)
+            print("Leu QRCode! => " + decoded.data)
+            Clock.unschedule(self.updateImage)
             return decoded.data
+
+    def requisition_code(self, qrCode):
+        #readed_qrcode = self.readcode()
+        readed_qrcode = qrCode
+        print("Variavel teste = "+qrCode)
+
+        #try:
+        r = requests.post("http://fast-retreat-18030.herokuapp.com/validate_qrcode", data={'qrcode': readed_qrcode})
+        result = r.json()
+
+        if 'errors' in result:
+            print("deu erro")
+            print result['errors']
+        elif 'code' in result:
+            print("deu certo")
+            print result['code']
+            self.open_socket(str(result['code']))
+        #except:
+         #   print("Não foi possível conectar ao servidor")
+
+    def open_socket(self, message):
+        IP = "127.0.0.1"
+        PORT = 9600
+    	TCP_IP = IP
+        TCP_PORT = PORT
+        BUFFER_SIZE = len(message)
+
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((TCP_IP, TCP_PORT))
+        sock.send(message)
+        data = sock.recv(100)
+        sock.close()
+    
+#    def __init__(self, *args):
+#        self.requisition_code()
+
+        # Teste para sair do while quando um qrcode for lido
+        #if decoded.data is not None:
+        #    break
