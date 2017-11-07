@@ -87,6 +87,7 @@ class ReadQRCodeScreen(Screen):
         if 'errors' in result:
             print("deu erro")
             print result['errors']
+            self.manager.current = 'invalidQRCodeScreen'
         elif 'code' in result:
             print("deu certo")
             print result['code']

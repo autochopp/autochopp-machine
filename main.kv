@@ -4,6 +4,7 @@ ScreenManagement:
     transition: sm.FadeTransition()
     MainScreen:
     ReadQRCodeScreen:
+    InvalidQRCodeScreen:
 	
 <MainScreen>:
     name: 'main'
@@ -48,4 +49,20 @@ ScreenManagement:
     #    on_release: app.root.current = 'main'
     #    text: 'back to the home screen'
     #    font_size: 50
-		
+
+<InvalidQRCodeScreen>:
+    name: 'invalidQRCodeScreen'
+    
+    BoxLayout:
+        orientation: 'vertical'
+
+        Button:
+            name: 'btnInfoInvalidQRCode'
+            id: btnInfoInvalidQRCode
+            text: 'QRCode inválido!\n\nToque na tela para voltar ao início.'
+            halign: 'center'
+            valign: 'middle'
+            background_color: (0.047, 0.22, 0.698, 1)
+            color: (0.992, 0.788, 0.267, 1)
+            font_size: 32
+            on_release: app.root.current = 'main'
