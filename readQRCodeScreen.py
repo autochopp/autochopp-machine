@@ -12,6 +12,7 @@ from kivy.graphics.texture import Texture
 import cv2
 import zbar
 import requests
+import socket
 
 from PIL import Image as ImagePIL
 
@@ -19,21 +20,8 @@ from PIL import Image as ImagePIL
 class ReadQRCodeScreen(Screen):
 
     def on_enter(self):
-
-        #self.ids['lblQrCode'].text = "teste"
-        print(self.ids)
-        for item in self.ids:
-            print(item)
-
-
-        self.lblQRCode = self.ids['lblQrCode']
+        #"capturando" o widget de IMAGE para atualizar a imagem da camera
         self.imgCamera = self.ids['imgCamera']
-        #self.imgCamera = Image(source='chopp.jpeg')
-     
-        #self.layout = BoxLayout(orientation='vertical')
-        
-        #self.add_widget(self.lblQRCode)
-        #self.add_widget(self.imgCamera)
 
         #criando um objeto de capture de video. Associamos a primeira camera
         self.capture = cv2.VideoCapture(0)
@@ -55,19 +43,18 @@ class ReadQRCodeScreen(Screen):
         #apresenta a imagem
         self.imgCamera.texture = texture1
 
-        #print(self.readQRCode(frame)) 
-
+        #fazendo a leitura do QRCode
         qrCode = self.readQRCode(frame)
 
+        #testa  se foi obtido algum valor do QRCode.
+        #caso TRUE, faz a requisição e encerra a camera e os frames guardados.
         if not qrCode is None:
             self.requisition_code(qrCode)
             del(self.capture)
             cv2.destroyAllWindows()
-            print "Teste 'is not None' " + qrCode
-        else:
-            print "Teste 'is None'"  
-
-        #
+        #    print "Teste 'is not None' " + qrCode
+        #else:
+        #    print "Teste 'is None'"
         
     def readQRCode(self, frame):
         # Converts image to grayscale.
@@ -84,14 +71,14 @@ class ReadQRCodeScreen(Screen):
 
         # Prints data from image.
         for decoded in zbar_image:
-            print("Leu QRCode! => " + decoded.data)
+            print("QRCode foi lido! => " + decoded.data)
             Clock.unschedule(self.updateImage)
             return decoded.data
 
     def requisition_code(self, qrCode):
         #readed_qrcode = self.readcode()
         readed_qrcode = qrCode
-        print("Variavel teste = "+qrCode)
+        print("QRCode passado para requisição = "+qrCode)
 
         #try:
         r = requests.post("http://fast-retreat-18030.herokuapp.com/validate_qrcode", data={'qrcode': readed_qrcode})
