@@ -87,10 +87,11 @@ class ReadQRCodeScreen(Screen):
         if 'errors' in result:
             print("deu erro")
             print result['errors']
-            self.manager.current = 'invalidQRCodeScreen'
+            self.manager.current = 'validQRCodeScreen'
         elif 'code' in result:
             print("deu certo")
             print result['code']
+            self.manager.current = 'validQRCodeScreen'            
             self.open_socket(str(result['code']))
         #except:
          #   print("Não foi possível conectar ao servidor")

@@ -5,6 +5,7 @@ ScreenManagement:
     MainScreen:
     ReadQRCodeScreen:
     InvalidQRCodeScreen:
+    ValidQRCodeScreen:
 	
 <MainScreen>:
     name: 'main'
@@ -60,6 +61,23 @@ ScreenManagement:
             name: 'btnInfoInvalidQRCode'
             id: btnInfoInvalidQRCode
             text: 'QRCode inválido!\n\nToque na tela para voltar ao início.'
+            halign: 'center'
+            valign: 'middle'
+            background_color: (0.047, 0.22, 0.698, 1)
+            color: (0.992, 0.788, 0.267, 1)
+            font_size: 32
+            on_release: app.root.current = 'main'
+
+<ValidQRCodeScreen>:
+    name: 'validQRCodeScreen'
+    
+    BoxLayout:
+        orientation: 'vertical'
+
+        Button:
+            name: 'btnInfoValidQRCode'
+            id: btnInfoValidQRCode
+            text: 'Seu QRCode é válido!\n\n Posicione seu copo no suporte \n\nAguarde enquanto seu chopp é preparado \n\nToque na tela para voltar ao início.'
             halign: 'center'
             valign: 'middle'
             background_color: (0.047, 0.22, 0.698, 1)

@@ -16,6 +16,9 @@ class ScreenManagement(ScreenManager):
 class InvalidQRCodeScreen(Screen):
     pass
 
+class ValidQRCodeScreen(Screen):
+    pass
+
 #presentation = Builder.load_file("main.kv")
 
 class MainApp(App):
