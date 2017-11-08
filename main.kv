@@ -1,0 +1,86 @@
+#:import sm kivy.uix.screenmanager
+
+ScreenManagement:
+    transition: sm.FadeTransition()
+    MainScreen:
+    ReadQRCodeScreen:
+    InvalidQRCodeScreen:
+    ValidQRCodeScreen:
+	
+<MainScreen>:
+    name: 'main'
+
+    Button:
+        on_release: app.root.current = 'readQRCodeScreen'
+        text: ' Bem vindo ao Auto-choop! \n\n Que tal um chopp? \n\n Toque na tela para pegar o seu!'
+        halign: 'center'
+        valign: 'middle'
+        background_color: (0.047, 0.22, 0.698, 1)
+        color: (0.992, 0.788, 0.267, 1)
+        font_size: 32
+    
+<ReadQRCodeScreen>:
+    name: 'readQRCodeScreen'
+    canvas:
+        Color:
+            #rgb: (0.93, 0.93, 0.93)
+            #rgb: (0.047, 0.22, 0.698)
+            rgb: (0.992, 0.788, 0.267, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        Label:
+            name: 'lblQrCode'
+            id: lblQrCode
+            text: "Aproxime seu QR Code da câmera"
+            font_size: 24
+            color: (0.047, 0.22, 0.698, 1)
+
+        Image:
+            name: 'imgCamera'
+            id: imgCamera
+            source: 'chopp.jpeg'
+    #        #size:
+
+    #Button:
+    #    on_release: app.root.current = 'main'
+    #    text: 'back to the home screen'
+    #    font_size: 50
+
+<InvalidQRCodeScreen>:
+    name: 'invalidQRCodeScreen'
+    
+    BoxLayout:
+        orientation: 'vertical'
+
+        Button:
+            name: 'btnInfoInvalidQRCode'
+            id: btnInfoInvalidQRCode
+            text: 'QRCode inválido!\n\nToque na tela para voltar ao início.'
+            halign: 'center'
+            valign: 'middle'
+            background_color: (0.047, 0.22, 0.698, 1)
+            color: (0.992, 0.788, 0.267, 1)
+            font_size: 32
+            on_release: app.root.current = 'main'
+
+<ValidQRCodeScreen>:
+    name: 'validQRCodeScreen'
+    
+    BoxLayout:
+        orientation: 'vertical'
+
+        Button:
+            name: 'btnInfoValidQRCode'
+            id: btnInfoValidQRCode
+            text: 'Seu QRCode é válido!\n\n Posicione seu copo no suporte \n\nAguarde enquanto seu chopp é preparado \n\nToque na tela para voltar ao início.'
+            halign: 'center'
+            valign: 'middle'
+            background_color: (0.047, 0.22, 0.698, 1)
+            color: (0.992, 0.788, 0.267, 1)
+            font_size: 32
+            on_release: app.root.current = 'main'

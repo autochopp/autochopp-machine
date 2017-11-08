@@ -1,33 +1,29 @@
+#!/usr/local/bin/python
+# coding: latin-1
+
 from kivy.app import App
-from kivy.properties import StringProperty
-from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
-import os
-from kivy.uix.button import Button
+from kivy.lang import Builder
+from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
 
-from connected import Connected
+from readQRCodeScreen import ReadQRCodeScreen
 
-class Login(Screen):
-    def do_login(self):
-        app = App.get_running_app()
-        app.config.read(app.get_application_config())
+class MainScreen(Screen):
+    pass
 
-        self.manager.add_widget(Connected(name='connected'))        
-        
-        self.manager.transition = SlideTransition(direction="left")
-        self.manager.current = 'connected'
+class ScreenManagement(ScreenManager):
+    pass
 
+class InvalidQRCodeScreen(Screen):
+    pass
 
-        s = self.manager.get_screen('connected')
+class ValidQRCodeScreen(Screen):
+    pass
 
-class LoginApp(App):
-   
+#presentation = Builder.load_file("main.kv")
+
+class MainApp(App):
     def build(self):
-        manager = ScreenManager()
-        manager.add_widget(Login(name='login'))
-        manager.transition = SlideTransition(direction="left")
+        #return presentation
+        pass
 
-        return manager
-
-if __name__ == '__main__':
-    LoginApp().run()
-
+MainApp().run()
