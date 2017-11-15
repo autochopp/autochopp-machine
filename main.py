@@ -19,6 +19,12 @@ class InvalidQRCodeScreen(Screen):
 class ValidQRCodeScreen(Screen):
     pass
 
+class SuccesChopp(Screen):
+    pass
+
+class WaitCup(Screen):
+    pass
+
 #presentation = Builder.load_file("main.kv")
 
 class MainApp(App):

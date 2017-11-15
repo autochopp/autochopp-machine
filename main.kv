@@ -6,6 +6,8 @@ ScreenManagement:
     ReadQRCodeScreen:
     InvalidQRCodeScreen:
     ValidQRCodeScreen:
+    WaitCup:
+    SuccesChopp:
 
 <MainScreen>:
     name: 'main'
@@ -41,8 +43,8 @@ ScreenManagement:
             color: (0.047, 0.22, 0.698, 1)
 
         Image:
-            name: 'imgCamera'
-            id: imgCamera
+            name: 'img_camera'
+            id: img_camera
             source: 'chopp.jpeg'
 
 <InvalidQRCodeScreen>:
@@ -69,7 +71,39 @@ ScreenManagement:
         Button:
             name: 'btnInfoValidQRCode'
             id: btnInfoValidQRCode
-            text: 'Seu QRCode é válido!\n\n Posicione seu copo no suporte \n\nAguarde enquanto seu chopp é preparado \n\nToque na tela para voltar ao início.'
+            text: 'Seu QRCode é válido!\n\n Posicione seu copo no suporte \n\n'
+            halign: 'center'
+            valign: 'middle'
+            background_color: (0.047, 0.22, 0.698, 1)
+            color: (0.992, 0.788, 0.267, 1)
+            font_size: 32
+            on_release: app.root.current = 'waitCup'
+
+<WaitCup>:
+    name: 'waitCup'
+    BoxLayout:
+        orientation: 'vertical'
+
+        Button:
+            name: 'btnInfoValidQRCode'
+            id: btnInfoValidQRCode
+            text: '\n\nAguarde enquanto seu chopp é preparado. \n\n'
+            halign: 'center'
+            valign: 'middle'
+            background_color: (0.047, 0.22, 0.698, 1)
+            color: (0.992, 0.788, 0.267, 1)
+            font_size: 32
+            on_release: app.root.current = 'succesChopp'
+
+<SuccesChopp>:
+    name: 'succesChopp'
+    BoxLayout:
+        orientation: 'vertical'
+
+        Button:
+            name: 'btnInfoValidQRCode'
+            id: btnInfoValidQRCode
+            text: 'Seu Chopp foi servido com sucesso!!\n\n\n\nToque na tela para voltar ao início.'
             halign: 'center'
             valign: 'middle'
             background_color: (0.047, 0.22, 0.698, 1)
