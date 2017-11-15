@@ -21,30 +21,29 @@ class ReadQRCodeScreen(Screen):
 
     def on_enter(self):
         #"capturando" o widget de IMAGE para atualizar a imagem da camera
-        self.imgCamera = self.ids['imgCamera']
+        self.img_camera = self.ids['img_camera']
 
         #criando um objeto de capture de video. Associamos a primeira camera
         self.capture = cv2.VideoCapture(0)
         #criando um frame com esta imagem
         ret, frame = self.capture.read()
         #criando um clock para atualizar a imagem a cada 1/320 de segundo
-        Clock.schedule_interval(self.updateImage, 1.0/30.0)
- 
-    def updateImage(self, dt):
-        
+        Clock.schedule_interval(self.update_image, 1.0/30.0)
+
+    def update_image(self, dt):
         #captura uma imagem da camera
         ret, frame = self.capture.read()
         #inverte a imagem
         buf1 = cv2.flip(frame, 0)
         #converte em textura
-        buf = buf1.tostring() 
+        buf = buf1.tostring()
         texture1 = Texture.create(size=(frame.shape[1], frame.shape[0]), colorfmt='rgb')
         texture1.blit_buffer(buf, colorfmt='rgb', bufferfmt='ubyte')
         #apresenta a imagem
-        self.imgCamera.texture = texture1
+        self.img_camera.texture = texture1
 
         #fazendo a leitura do QRCode
-        qrCode = self.readQRCode(frame)
+        qrCode = self.read_qr_code(frame)
 
         #testa  se foi obtido algum valor do QRCode.
         #caso TRUE, faz a requisição e encerra a camera e os frames guardados.
@@ -52,11 +51,8 @@ class ReadQRCodeScreen(Screen):
             self.requisition_code(qrCode)
             del(self.capture)
             cv2.destroyAllWindows()
-        #    print "Teste 'is not None' " + qrCode
-        #else:
-        #    print "Teste 'is None'"
-        
-    def readQRCode(self, frame):
+
+    def read_qr_code(self, frame):
         # Converts image to grayscale.
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
@@ -72,7 +68,7 @@ class ReadQRCodeScreen(Screen):
         # Prints data from image.
         for decoded in zbar_image:
             print("QRCode foi lido! => " + decoded.data)
-            Clock.unschedule(self.updateImage)
+            Clock.unschedule(self.update_image)
             return decoded.data
 
     def requisition_code(self, qrCode):
@@ -85,21 +81,19 @@ class ReadQRCodeScreen(Screen):
         result = r.json()
 
         if 'errors' in result:
-            print("deu erro")
+            print("Error: ")
             print result['errors']
             self.manager.current = 'invalidQRCodeScreen'
         elif 'code' in result:
-            print("deu certo")
+            print("Success: ")
             print result['code']
-            self.manager.current = 'validQRCodeScreen'            
+            self.manager.current = 'validQRCodeScreen'
             self.open_socket(str(result['code']))
-        #except:
-         #   print("Não foi possível conectar ao servidor")
 
     def open_socket(self, message):
         IP = "127.0.0.1"
         PORT = 9600
-    	TCP_IP = IP
+        TCP_IP = IP
         TCP_PORT = PORT
         BUFFER_SIZE = len(message)
 
@@ -108,10 +102,3 @@ class ReadQRCodeScreen(Screen):
         sock.send(message)
         data = sock.recv(100)
         sock.close()
-    
-#    def __init__(self, *args):
-#        self.requisition_code()
-
-        # Teste para sair do while quando um qrcode for lido
-        #if decoded.data is not None:
-        #    break
