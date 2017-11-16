@@ -93,7 +93,7 @@ class ReadQRCodeScreen(Screen):
             elif 'code' in result:
                 print("deu certo")
                 print result['code']
-                self.manager.current = 'validQRCodeScreen'
+                
                 self.open_socket(str(result['code']))
                 print "Eu to aqui."
         except:
@@ -109,7 +109,8 @@ class ReadQRCodeScreen(Screen):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.connect((TCP_IP, TCP_PORT))
         sock.send(message)
-        #data = sock.recv(100)
+        self.manager.current = 'validQRCodeScreen'
+        data = sock.recv(100)
         sock.close()
         print "Passo 2"
 
