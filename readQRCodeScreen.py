@@ -6,8 +6,8 @@ from kivy.uix.image import Image
 from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
 from kivy.clock import Clock
-
 from kivy.graphics.texture import Texture
+from embedded_electronics import MachineController
 
 import cv2
 import zbar
@@ -76,14 +76,18 @@ class ReadQRCodeScreen(Screen):
         readed_qrcode = qrCode
         print("QRCode passado para requisição = "+qrCode)
 
-        #try:
         r = requests.post("http://fast-retreat-18030.herokuapp.com/validate_qrcode", data={'qrcode': readed_qrcode})
         result = r.json()
 
+        machine = MachineController()
         if 'errors' in result:
             print("Error: ")
             print result['errors']
             self.manager.current = 'invalidQRCodeScreen'
+            
+            if machine.is_drawer_open() == True:
+                self.manager.current = 'waitCup'
+                
         elif 'code' in result:
             print("Success: ")
             print result['code']
