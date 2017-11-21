@@ -1,13 +1,14 @@
 #:import sm kivy.uix.screenmanager
 
 ScreenManagement:
-    transition: sm.FadeTransition()
+    transition: sm.NoTransition()
     MainScreen:
     ReadQRCodeScreen:
     InvalidQRCodeScreen:
     ValidQRCodeScreen:
     WaitCup:
-    SuccesChopp:
+    WaitChopp:
+    SuccessChopp:
 
 <MainScreen>:
     name: 'main'
@@ -71,7 +72,7 @@ ScreenManagement:
         Button:
             name: 'btnInfoValidQRCode'
             id: btnInfoValidQRCode
-            text: 'Seu QRCode é válido!\n\n Posicione seu copo no suporte \n\n'
+            text: 'QRCode válido!\n\n Aguarde um momento... \n\n'
             halign: 'center'
             valign: 'middle'
             background_color: (0.047, 0.22, 0.698, 1)
@@ -87,16 +88,32 @@ ScreenManagement:
         Button:
             name: 'btnInfoValidQRCode'
             id: btnInfoValidQRCode
+            text: '\n\nPegue seu copo na gaveta,\n\n e posicione no suporte! \n\n'
+            halign: 'center'
+            valign: 'middle'
+            background_color: (0.047, 0.22, 0.698, 1)
+            color: (0.992, 0.788, 0.267, 1)
+            font_size: 32
+            on_release: app.root.current = 'successChopp'
+
+<WaitChopp>:
+    name: 'waitChopp'
+    BoxLayout:
+        orientation: 'vertical'
+
+        Button:
+            name: 'btnInfoValidQRCode'
+            id: btnInfoValidQRCode
             text: '\n\nAguarde enquanto seu chopp é preparado. \n\n'
             halign: 'center'
             valign: 'middle'
             background_color: (0.047, 0.22, 0.698, 1)
             color: (0.992, 0.788, 0.267, 1)
             font_size: 32
-            on_release: app.root.current = 'succesChopp'
+            on_release: app.root.current = 'successChopp'
 
-<SuccesChopp>:
-    name: 'succesChopp'
+<SuccessChopp>:
+    name: 'successChopp'
     BoxLayout:
         orientation: 'vertical'
 

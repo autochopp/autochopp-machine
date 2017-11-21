@@ -19,10 +19,13 @@ class InvalidQRCodeScreen(Screen):
 class ValidQRCodeScreen(Screen):
     pass
 
-class SuccesChopp(Screen):
+class SuccessChopp(Screen):
     pass
 
 class WaitCup(Screen):
+    pass
+
+class WaitChopp(Screen):
     pass
 
 #presentation = Builder.load_file("main.kv")

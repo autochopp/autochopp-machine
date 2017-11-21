@@ -13,11 +13,15 @@ import cv2
 import zbar
 import requests
 import socket
+import time
 
 from PIL import Image as ImagePIL
 
 
 class ReadQRCodeScreen(Screen):
+
+    machine = MachineController()
+    chopp_result = 0
 
     def on_enter(self):
         #"capturando" o widget de IMAGE para atualizar a imagem da camera
@@ -48,9 +52,9 @@ class ReadQRCodeScreen(Screen):
         #testa  se foi obtido algum valor do QRCode.
         #caso TRUE, faz a requisição e encerra a camera e os frames guardados.
         if not qrCode is None:
-            self.requisition_code(qrCode)
             del(self.capture)
             cv2.destroyAllWindows()
+            self.requisition_code(qrCode)
 
     def read_qr_code(self, frame):
         # Converts image to grayscale.
@@ -79,30 +83,31 @@ class ReadQRCodeScreen(Screen):
         r = requests.post("http://fast-retreat-18030.herokuapp.com/validate_qrcode", data={'qrcode': readed_qrcode})
         result = r.json()
 
-        machine = MachineController()
         if 'errors' in result:
             print("Error: ")
             print result['errors']
             self.manager.current = 'invalidQRCodeScreen'
-            
-            if machine.is_drawer_open() == True:
-                self.manager.current = 'waitCup'
                 
         elif 'code' in result:
             print("Success: ")
             print result['code']
+            self.chopp_result = result['code']
             self.manager.current = 'validQRCodeScreen'
-            self.open_socket(str(result['code']))
+            Clock.schedule_once(self.wait_cup, 1)
+ 
+    def wait_cup(self, dt):
+        if self.machine.is_drawer_open() == True:
+            self.manager.current = 'waitCup'
+            print "WaitCup"
+            Clock.schedule_once(self.wait_chopp)
 
-    def open_socket(self, message):
-        IP = "127.0.0.1"
-        PORT = 9600
-        TCP_IP = IP
-        TCP_PORT = PORT
-        BUFFER_SIZE = len(message)
+    def wait_chopp(self, dt):
+        if self.machine.cup_activate() == True:
+            print "WaitChopp"
+            self.manager.current = 'waitChopp'
+            Clock.schedule_once(self.success_chopp)
 
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.connect((TCP_IP, TCP_PORT))
-        sock.send(message)
-        data = sock.recv(100)
-        sock.close()
+    def success_chopp(self, dt):
+        if self.machine.already_got_beer(self.chopp_result) == True:
+            print "sucess Chopp"
+            self.manager.current = 'successChopp'
