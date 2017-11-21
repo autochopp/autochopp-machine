@@ -28,6 +28,9 @@ class WaitCup(Screen):
 class WaitChopp(Screen):
     pass
 
+class ExceptionScreen(Screen):
+    pass
+
 #presentation = Builder.load_file("main.kv")
 
 class MainApp(App):

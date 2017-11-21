@@ -9,6 +9,7 @@ ScreenManagement:
     WaitCup:
     WaitChopp:
     SuccessChopp:
+    ExceptionScreen:
 
 <MainScreen>:
     name: 'main'
@@ -78,7 +79,6 @@ ScreenManagement:
             background_color: (0.047, 0.22, 0.698, 1)
             color: (0.992, 0.788, 0.267, 1)
             font_size: 32
-            on_release: app.root.current = 'waitCup'
 
 <WaitCup>:
     name: 'waitCup'
@@ -94,7 +94,6 @@ ScreenManagement:
             background_color: (0.047, 0.22, 0.698, 1)
             color: (0.992, 0.788, 0.267, 1)
             font_size: 32
-            on_release: app.root.current = 'successChopp'
 
 <WaitChopp>:
     name: 'waitChopp'
@@ -110,7 +109,6 @@ ScreenManagement:
             background_color: (0.047, 0.22, 0.698, 1)
             color: (0.992, 0.788, 0.267, 1)
             font_size: 32
-            on_release: app.root.current = 'successChopp'
 
 <SuccessChopp>:
     name: 'successChopp'
@@ -121,6 +119,22 @@ ScreenManagement:
             name: 'btnInfoValidQRCode'
             id: btnInfoValidQRCode
             text: 'Seu Chopp foi servido com sucesso!!\n\n\n\nToque na tela para voltar ao início.'
+            halign: 'center'
+            valign: 'middle'
+            background_color: (0.047, 0.22, 0.698, 1)
+            color: (0.992, 0.788, 0.267, 1)
+            font_size: 32
+            on_release: app.root.current = 'main'
+
+<ExceptionScreen>:
+    name: 'exceptionScreen'
+    BoxLayout:
+        orientation: 'vertical'
+
+        Button:
+            name: 'btnInfoValidQRCode'
+            id: btnInfoValidQRCode
+            text: 'Estamos com problemas em nossos servidores!!\n\n\n\nPor favor, volte mais tarde.'
             halign: 'center'
             valign: 'middle'
             background_color: (0.047, 0.22, 0.698, 1)

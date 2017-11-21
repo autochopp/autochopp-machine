@@ -80,20 +80,23 @@ class ReadQRCodeScreen(Screen):
         readed_qrcode = qrCode
         print("QRCode passado para requisição = "+qrCode)
 
-        r = requests.post("http://fast-retreat-18030.herokuapp.com/validate_qrcode", data={'qrcode': readed_qrcode})
-        result = r.json()
+        try: 
+            r = requests.post("http://fast-retreat-18030.herokuapp.com/validate_qrcode", data={'qrcode': readed_qrcode})
+            result = r.json()
 
-        if 'errors' in result:
-            print("Error: ")
-            print result['errors']
-            self.manager.current = 'invalidQRCodeScreen'
-                
-        elif 'code' in result:
-            print("Success: ")
-            print result['code']
-            self.chopp_result = result['code']
-            self.manager.current = 'validQRCodeScreen'
-            Clock.schedule_once(self.wait_cup, 1)
+            if 'errors' in result:
+                print("Error: ")
+                print result['errors']
+                self.manager.current = 'invalidQRCodeScreen'
+                    
+            elif 'code' in result:
+                print("Success: ")
+                print result['code']
+                self.chopp_result = result['code']
+                self.manager.current = 'validQRCodeScreen'
+                Clock.schedule_once(self.wait_cup, 1)
+        except:
+            self.manager.current = 'exceptionScreen'
  
     def wait_cup(self, dt):
         if self.machine.is_drawer_open() == True:
