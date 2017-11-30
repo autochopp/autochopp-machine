@@ -27,9 +27,9 @@ class ReadQRCodeScreen(Screen):
         #"capturando" o widget de IMAGE para atualizar a imagem da camera
         self.img_camera = self.ids['img_camera']
 
-        #criando um objeto de capture de video. Associamos a primeira camera
+        # criando um objeto de capture de video. Associamos a primeira camera
         self.capture = cv2.VideoCapture(0)
-        #criando um frame com esta imagem
+        # criando um frame com esta imagem
         ret, frame = self.capture.read()
         #criando um clock para atualizar a imagem a cada 1/320 de segundo
         Clock.schedule_interval(self.update_image, 1.0/30.0)
@@ -37,7 +37,7 @@ class ReadQRCodeScreen(Screen):
     def update_image(self, dt):
         #captura uma imagem da camera
         ret, frame = self.capture.read()
-        #inverte a imagem
+        # inverte a imagem
         buf1 = cv2.flip(frame, 0)
         #converte em textura
         buf = buf1.tostring()
@@ -49,8 +49,8 @@ class ReadQRCodeScreen(Screen):
         #fazendo a leitura do QRCode
         qrCode = self.read_qr_code(frame)
 
-        #testa  se foi obtido algum valor do QRCode.
-        #caso TRUE, faz a requisição e encerra a camera e os frames guardados.
+        # testa  se foi obtido algum valor do QRCode.
+        # caso TRUE, faz a requisição e encerra a camera e os frames guardados.
         if not qrCode is None:
             del(self.capture)
             cv2.destroyAllWindows()

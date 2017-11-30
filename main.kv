@@ -19,8 +19,8 @@ ScreenManagement:
         text: ' Bem vindo ao Auto-choop! \n\n Que tal um chopp? \n\n Toque na tela para pegar o seu!'
         halign: 'center'
         valign: 'middle'
-        background_color: (0.047, 0.22, 0.698, 1)
-        color: (0.992, 0.788, 0.267, 1)
+        background_color: (0.209, 0.200, 0.204, 1)
+        color: (1, 1, 1, 1)
         font_size: 32
 
 <ReadQRCodeScreen>:
@@ -29,7 +29,9 @@ ScreenManagement:
         Color:
             #rgb: (0.93, 0.93, 0.93)
             #rgb: (0.047, 0.22, 0.698)
-            rgb: (0.992, 0.788, 0.267, 1)
+            #rgb: (0.992, 0.788, 0.267, 1)
+            rgb: (0.209, 0.200, 0.204, 1)
+            
         Rectangle:
             pos: self.pos
             size: self.size
@@ -42,7 +44,8 @@ ScreenManagement:
             id: lblQrCode
             text: "Aproxime seu QR Code da câmera"
             font_size: 24
-            color: (0.047, 0.22, 0.698, 1)
+            color: (1, 1, 1, 1)
+            #color: (0.047, 0.22, 0.698, 1)
 
         Image:
             name: 'img_camera'
@@ -60,7 +63,7 @@ ScreenManagement:
             text: 'QRCode inválido!\n\nToque na tela para voltar ao início.'
             halign: 'center'
             valign: 'middle'
-            background_color: (0.047, 0.22, 0.698, 1)
+            background_color: (0.209, 0.200, 0.204, 1)
             color: (0.992, 0.788, 0.267, 1)
             font_size: 32
             on_release: app.root.current = 'main'
@@ -137,7 +140,7 @@ ScreenManagement:
             text: 'Estamos com problemas em nossos servidores!!\n\n\n\nPor favor, volte mais tarde.'
             halign: 'center'
             valign: 'middle'
-            background_color: (0.047, 0.22, 0.698, 1)
+            background_color: (0.209, 0.200, 0.204, 1)
             color: (0.992, 0.788, 0.267, 1)
             font_size: 32
             on_release: app.root.current = 'main'
