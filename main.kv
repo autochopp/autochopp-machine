@@ -16,10 +16,11 @@ ScreenManagement:
 
     Button:
         on_release: app.root.current = 'readQRCodeScreen'
-        text: ' Bem vindo ao Auto-choop! \n\n Que tal um chopp? \n\n Toque na tela para pegar o seu!'
+        text: '\n\n\n\n\n\n\n Bem vindo! \n\n\n Toque na tela para pegar seu chopp!'
         halign: 'center'
         valign: 'middle'
-        background_color: (0.209, 0.200, 0.204, 1)
+        #background_color: (0.209, 0.200, 0.204, 1)
+        background_normal: 'tela-inicial.png'
         color: (1, 1, 1, 1)
         font_size: 32
 
@@ -30,11 +31,12 @@ ScreenManagement:
             #rgb: (0.93, 0.93, 0.93)
             #rgb: (0.047, 0.22, 0.698)
             #rgb: (0.992, 0.788, 0.267, 1)
-            rgb: (0.209, 0.200, 0.204, 1)
+            #rgb: (0.209, 0.200, 0.204, 1)
             
         Rectangle:
             pos: self.pos
             size: self.size
+            source: "tela-outras.png"
 
     BoxLayout:
         orientation: 'vertical'
@@ -42,7 +44,7 @@ ScreenManagement:
         Label:
             name: 'lblQrCode'
             id: lblQrCode
-            text: "Aproxime seu QR Code da câmera"
+            text: "\n\n\n\nAproxime seu QR Code da câmera."
             font_size: 24
             color: (1, 1, 1, 1)
             #color: (0.047, 0.22, 0.698, 1)
@@ -63,7 +65,7 @@ ScreenManagement:
             text: 'QRCode inválido!\n\nToque na tela para voltar ao início.'
             halign: 'center'
             valign: 'middle'
-            background_color: (0.209, 0.200, 0.204, 1)
+            background_normal: 'tela-outras.png'
             color: (1, 1, 1, 1)
             font_size: 32
             on_release: app.root.current = 'main'
@@ -79,7 +81,7 @@ ScreenManagement:
             text: 'QRCode válido!\n\n Aguarde um momento... \n\n'
             halign: 'center'
             valign: 'middle'
-            background_color: (0.209, 0.200, 0.204, 1)
+            background_normal: 'tela-outras.png'
             color: (1, 1, 1, 1)
             font_size: 32
 
@@ -94,7 +96,7 @@ ScreenManagement:
             text: '\n\nPegue seu copo na gaveta,\n\n e posicione no suporte! \n\n'
             halign: 'center'
             valign: 'middle'
-            background_color: (0.209, 0.200, 0.204, 1)
+            background_normal: 'tela-outras.png'
             color: (1, 1, 1, 1)
             font_size: 32
 
@@ -109,7 +111,7 @@ ScreenManagement:
             text: '\n\nAguarde enquanto seu chopp é preparado. \n\n'
             halign: 'center'
             valign: 'middle'
-            background_color: (0.209, 0.200, 0.204, 1)
+            background_normal: 'tela-outras.png'
             color: (1, 1, 1, 1)
             font_size: 32
 
@@ -124,7 +126,7 @@ ScreenManagement:
             text: 'Seu Chopp foi servido com sucesso!!\n\n\n\nToque na tela para voltar ao início.'
             halign: 'center'
             valign: 'middle'
-            background_color: (0.209, 0.200, 0.204, 1)
+            background_normal: 'tela-outras.png'
             color: (1, 1, 1, 1)
             font_size: 32
             on_release: app.root.current = 'main'
@@ -140,7 +142,7 @@ ScreenManagement:
             text: 'Estamos com problemas em nossos servidores!!\n\n\n\nPor favor, volte mais tarde.'
             halign: 'center'
             valign: 'middle'
-            background_color: (0.209, 0.200, 0.204, 1)
+            background_normal: 'tela-outras.png'
             color: (1, 1, 1, 1)
             font_size: 32
             on_release: app.root.current = 'main'
