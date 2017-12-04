@@ -21,7 +21,6 @@ from PIL import Image as ImagePIL
 class ReadQRCodeScreen(Screen):
 
     machine = MachineController()
-    chopp_result = 0
 
     def on_enter(self):
         #"capturando" o widget de IMAGE para atualizar a imagem da camera
@@ -92,8 +91,8 @@ class ReadQRCodeScreen(Screen):
             elif 'code' in result:
                 print("Success: ")
                 print result['code']
-                self.chopp_result = result['code']
                 self.manager.current = 'validQRCodeScreen'
+                self.machine.set_chopp(result['code'])
                 Clock.schedule_once(self.wait_cup, 1)
         except:
             self.manager.current = 'exceptionScreen'
