@@ -4,11 +4,21 @@
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
+from embedded_electronics import MachineController
+
 
 from readQRCodeScreen import ReadQRCodeScreen
 
 class MainScreen(Screen):
-    pass
+    
+    machine = MachineController()
+
+    def on_pre_leave(self):
+        
+        if self.machine.power_on_nobreak() == True:
+            self.manager.current = 'exceptionNoBreakScreen'
+        elif self.machine.power_on_nobreak() == False:
+            self.manager.current = 'readQRCodeScreen'
 
 class ScreenManagement(ScreenManager):
     pass
@@ -29,6 +39,9 @@ class WaitChopp(Screen):
     pass
 
 class ExceptionScreen(Screen):
+    pass
+
+class ExceptionNoBreakScreen(Screen):
     pass
 
 #presentation = Builder.load_file("main.kv")

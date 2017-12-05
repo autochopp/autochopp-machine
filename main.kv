@@ -10,6 +10,8 @@ ScreenManagement:
     WaitChopp:
     SuccessChopp:
     ExceptionScreen:
+    ExceptionNoBreakScreen:
+
 
 <MainScreen>:
     name: 'main'
@@ -140,6 +142,22 @@ ScreenManagement:
             name: 'btnInfoValidQRCode'
             id: btnInfoValidQRCode
             text: 'Estamos com problemas em nossos servidores!!\n\n\n\nPor favor, volte mais tarde.'
+            halign: 'center'
+            valign: 'middle'
+            background_normal: 'tela-outras.png'
+            color: (1, 1, 1, 1)
+            font_size: 32
+            on_release: app.root.current = 'main'
+
+<ExceptionNoBreakScreen>:
+    name: 'exceptionNoBreakScreen'
+    BoxLayout:
+        orientation: 'vertical'
+
+        Button:
+            name: 'btnInfoValidQRCode'
+            id: btnInfoValidQRCode
+            text: 'Estamos com falta de energia no momento!!\n\n\n\nPor favor, tente novamente mais tarde.'
             halign: 'center'
             valign: 'middle'
             background_normal: 'tela-outras.png'
