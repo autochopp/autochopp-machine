@@ -13,7 +13,7 @@ class MainScreen(Screen):
     
     machine = MachineController()
 
-    def on_pre_leave(self):
+    def switch(self):
         
         if self.machine.power_on_nobreak() == True:
             self.manager.current = 'exceptionNoBreakScreen'

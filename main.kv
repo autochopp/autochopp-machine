@@ -17,7 +17,7 @@ ScreenManagement:
     name: 'main'
 
     Button:
-        on_release: app.root.current = 'readQRCodeScreen'
+        on_press: root.switch()
         text: '\n\n\n\n\n\n\n Bem vindo! \n\n\n Toque na tela para pegar seu chopp!'
         halign: 'center'
         valign: 'middle'
@@ -70,7 +70,7 @@ ScreenManagement:
             background_normal: 'tela-outras.png'
             color: (1, 1, 1, 1)
             font_size: 32
-            on_release: app.root.current = 'main'
+            on_press: app.root.current = 'main'
 
 <ValidQRCodeScreen>:
     name: 'validQRCodeScreen'
@@ -131,7 +131,7 @@ ScreenManagement:
             background_normal: 'tela-outras.png'
             color: (1, 1, 1, 1)
             font_size: 32
-            on_release: app.root.current = 'main'
+            on_press: app.root.current = 'main'
 
 <ExceptionScreen>:
     name: 'exceptionScreen'
@@ -147,7 +147,7 @@ ScreenManagement:
             background_normal: 'tela-outras.png'
             color: (1, 1, 1, 1)
             font_size: 32
-            on_release: app.root.current = 'main'
+            on_press: app.root.current = 'main'
 
 <ExceptionNoBreakScreen>:
     name: 'exceptionNoBreakScreen'
@@ -163,4 +163,4 @@ ScreenManagement:
             background_normal: 'tela-outras.png'
             color: (1, 1, 1, 1)
             font_size: 32
-            on_release: app.root.current = 'main'
+            on_press: app.root.current = 'main'
