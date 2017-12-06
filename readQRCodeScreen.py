@@ -108,6 +108,8 @@ class ReadQRCodeScreen(Screen):
             print "WaitChopp"
             self.manager.current = 'waitChopp'
             Clock.schedule_once(self.success_chopp)
+        elif self.machine.cup_activate() == False:
+            self.manager.current = 'main' 
 
     def success_chopp(self, dt):
         if self.machine.already_got_beer() == True:
